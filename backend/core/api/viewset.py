@@ -48,9 +48,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        qs = super().get_queryset()
-        qs = qs.filter(user=self.request.user)
-        qs = qs.exclude(agenda__dia__lt=datetime.datetime.now().date())
+        qs = super().get_queryset().filter(user=self.request.user).exclude(agenda__dia__lt=datetime.datetime.now().date()).exclude(horario__lt=datetime.datetime.now().time())
         return qs
 
     def create(self, request, *args, **kwargs):
@@ -83,9 +81,22 @@ class AgendaViewSet(viewsets.ModelViewSet):
 
 
     def get_queryset(self):
-        consultas_marcadas = list(Consulta.objects.all().values_list('horario', flat=True))
+        consultas_marcadas = list(Consulta.objects.all().values_list('horario', 'agenda__dia'))
         #queryset = self.queryset.exclude(dia__lt=datetime.datetime.now().date(), horario__horario__in=consultas_marcadas, )
-        queryset = self.queryset.exclude(horario__horario__in=consultas_marcadas,)
+        #.exclude(horario__horario__lt=datetime.datetime.now().time())
+        queryset = self.queryset.exclude(dia__lt=datetime.datetime.now().date()).order_by('dia')
+        new_queryset = []
+        for agenda in queryset:
+            horarios_disponiveis = [obj.horario for obj in agenda.horario.all()]
+            for consulta in agenda.consulta_set.all():
+                if consulta.horario in horarios_disponiveis:
+                    horarios_disponiveis.remove(consulta.horario)
+
+            if horarios_disponiveis:
+                new_queryset.append(agenda)
+
+        queryset = new_queryset
+
 
         medicos = self.request.query_params.getlist('medico')
         especialidades = self.request.query_params.getlist('especialidade')

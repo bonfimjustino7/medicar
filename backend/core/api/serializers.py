@@ -6,10 +6,10 @@ from rest_framework.exceptions import ValidationError
 
 
 class EspecialidadeSerializers(serializers.ModelSerializer):
-
     class Meta:
         model = Especialidade
         fields = ('id', 'nome',)
+
 
 class MedicoSerializers(serializers.ModelSerializer):
     especialidade = EspecialidadeSerializers(read_only=True, many=False)
@@ -19,22 +19,28 @@ class MedicoSerializers(serializers.ModelSerializer):
         model = Medico
         fields = ('id', 'crm', 'nome', 'especialidade', 'especialidade_id')
 
-class HorarioSerializers(serializers.RelatedField):
-
-    def to_representation(self, value):
-        return value.horario
-
-    class Meta:
-        model = Horario
-
 class AgendaSerializers(serializers.ModelSerializer):
     medico = MedicoSerializers(read_only=True)
     medico_id = serializers.IntegerField(write_only=True)
-    horario = HorarioSerializers(many=True, read_only=True)
+    horario = serializers.SerializerMethodField()
+
+    def get_horario(self, value):
+        horarios_disponiveis = []
+        for horario in value.horario.all():
+            if horario.horario > datetime.datetime.now().time():  # filtra os horarios passados
+                horarios_disponiveis.append(horario.horario)
+
+        for consulta in value.consulta_set.all():
+            if consulta.horario in horarios_disponiveis:
+                horarios_disponiveis.remove(consulta.horario)
+
+        return [hour.strftime('%H:%M') for hour in horarios_disponiveis ]
+
 
     class Meta:
         model = Agenda
         fields = ('id', 'medico', 'medico_id', 'dia', 'horario',)
+
 
 class ConsultasSerializers(serializers.ModelSerializer):
     agenda_id = serializers.IntegerField(write_only=True)
@@ -43,7 +49,7 @@ class ConsultasSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Consulta
-        fields = ('id', 'dia', 'horario','data_agendamento','agenda_id', 'medico')
+        fields = ('id', 'dia', 'horario', 'data_agendamento', 'agenda_id', 'medico')
 
     def get_dia(self, obj):
         return obj.agenda.dia
@@ -63,16 +69,16 @@ class ConsultasSerializers(serializers.ModelSerializer):
 
         if d.now().date() == agenda.dia:
             hora_consulta = d.strptime(self.initial_data['horario'], '%H:%M').time()
-            if hora_consulta <= d.now().time():
+            if hora_consulta < d.now().time():
                 raise ValidationError({'detail': 'Não é possivel marcar consultas para horários passados.'})
 
-
-        consulta = Consulta.objects.filter(user=self.context['request'].user, horario=self.initial_data['horario'], agenda__dia=agenda.dia)
+        consulta = Consulta.objects.filter(user=self.context['request'].user, horario=self.initial_data['horario'],
+                                           agenda__dia=agenda.dia)
         if consulta:
             raise ValidationError({'detail': 'Você já possui uma consulta neste dia e também neste horário.'})
 
         if consultas:
-            raise ValidationError({'detail': 'Não é possivel marcar a consulta, pois o dia e horário já estão alocados.'})
-
+            raise ValidationError(
+                {'detail': 'Não é possivel marcar a consulta, pois o dia e horário já estão alocados.'})
 
         return super().is_valid(raise_exception)
