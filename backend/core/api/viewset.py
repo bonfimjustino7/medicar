@@ -81,10 +81,25 @@ class AgendaViewSet(viewsets.ModelViewSet):
 
 
     def get_queryset(self):
-        consultas_marcadas = list(Consulta.objects.all().values_list('horario', 'agenda__dia'))
-        #queryset = self.queryset.exclude(dia__lt=datetime.datetime.now().date(), horario__horario__in=consultas_marcadas, )
-        #.exclude(horario__horario__lt=datetime.datetime.now().time())
         queryset = self.queryset.exclude(dia__lt=datetime.datetime.now().date()).order_by('dia')
+
+        try:
+            medicos = self.request.query_params.getlist('medico')
+            especialidades = self.request.query_params.getlist('especialidade')
+            data_inicio = self.request.query_params.get('data_inicio')
+            data_final = self.request.query_params.get('data_final')
+
+            if medicos:
+                queryset = queryset.filter(medico_id__in=medicos)
+
+            if especialidades:
+                queryset = queryset.filter(medico__especialidade_id__in=especialidades)
+
+            if data_inicio and data_final:
+                queryset = queryset.filter(dia__range=[data_inicio, data_final])
+        except ValueError:
+            raise ValidationError({'detail': 'Argumento de filtro inválido.'})
+
         new_queryset = []
         for agenda in queryset:
             horarios_disponiveis = [obj.horario for obj in agenda.horario.all()]
@@ -95,21 +110,5 @@ class AgendaViewSet(viewsets.ModelViewSet):
             if horarios_disponiveis:
                 new_queryset.append(agenda)
 
-        queryset = new_queryset
 
-
-        medicos = self.request.query_params.getlist('medico')
-        especialidades = self.request.query_params.getlist('especialidade')
-        data_inicio = self.request.query_params.get('data_inicio')
-        data_final = self.request.query_params.get('data_final')
-
-        if medicos:
-            queryset = queryset.filter(medico_id__in=medicos)
-
-        if especialidades:
-            queryset = queryset.filter(medico__especialidade_id__in=especialidades)
-
-        if data_inicio and data_final:
-            queryset = queryset.filter(dia__range=[data_inicio, data_final])
-
-        return queryset
+        return new_queryset
