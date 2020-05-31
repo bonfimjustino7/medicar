@@ -5,8 +5,8 @@ from core.api import viewset
 router = routers.DefaultRouter()
 router.register(r'especialidades', viewset.EspecialidadeViewSet)
 router.register(r'medicos', viewset.MedicoViewSet)
-# router.register(r'ongs', viewset.OngsViewSet)
-# router.register(r'products', viewset.ProductViewSet)
+router.register(r'consultas', viewset.ConsultaViewSet)
+router.register(r'agendas', viewset.AgendaViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
