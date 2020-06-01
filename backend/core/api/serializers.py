@@ -1,9 +1,12 @@
 import datetime
 
+from django.contrib.auth import password_validation
+from django.contrib.auth.models import User
+from django.core import exceptions
 from rest_framework import serializers, status
 from core.models import Especialidade, Agenda, Medico, Consulta, Horario
 from rest_framework.exceptions import ValidationError
-
+from rest_framework.authtoken.models import Token
 
 class EspecialidadeSerializers(serializers.ModelSerializer):
     class Meta:
@@ -82,3 +85,48 @@ class ConsultasSerializers(serializers.ModelSerializer):
                 {'detail': 'Não é possivel marcar a consulta, pois o dia e horário já estão alocados.'})
 
         return super().is_valid(raise_exception)
+
+class CreateSerializers(serializers.ModelSerializer):
+    password = serializers.CharField(required=True, write_only=True)
+    password2 = serializers.CharField(required=True, write_only=True)
+    token = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'password2', 'token')
+
+
+    def is_valid(self, raise_exception=False):
+        dados = self.initial_data
+        if dados['password'] and dados['password2'] and dados['password'] != dados['password2']:
+            raise ValidationError({'datail': 'As senhas devem combinar.'})
+
+        return super().is_valid(raise_exception)
+
+    def validate(self, attrs):
+        data = attrs
+        del data['password2']
+        user = User(**data)
+
+        password = attrs.get('password')
+        errors = dict()
+        try:
+            # validate the password and catch the exception
+            password_validation.validate_password(password=password, user=User)
+
+        # the exception raised here is different than serializers.ValidationError
+        except exceptions.ValidationError as e:
+            errors['password'] = list(e.messages)
+            raise ValidationError(errors)
+
+        return super().validate(data)
+
+
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        serialize = self.to_representation(user)
+        serialize['token'] = Token.objects.get(user=user).key
+
+        return serialize
