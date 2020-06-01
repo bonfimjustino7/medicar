@@ -97,11 +97,12 @@ class CreateSerializers(serializers.ModelSerializer):
 
 
     def is_valid(self, raise_exception=False):
+        is_valid = super().is_valid(raise_exception)
         dados = self.initial_data
         if dados['password'] and dados['password2'] and dados['password'] != dados['password2']:
             raise ValidationError({'datail': 'As senhas devem combinar.'})
 
-        return super().is_valid(raise_exception)
+        return is_valid
 
     def validate(self, attrs):
         data = attrs
