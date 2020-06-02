@@ -1,0 +1,28 @@
+<div class="container-login">
+    <div class="header">
+        <img src="assets/img/Logo.png" alt="">
+    </div>
+    <form class="form-login">
+        <mat-form-field appearance="outline" class="login-input">
+            <mat-label>Email ou Login</mat-label>
+            <input matInput>
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="login-input">
+            <mat-label>Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+        <mat-checkbox class="lembrar" color="primary">Lembrar minha senha</mat-checkbox>
+        <div class="form-button">
+            <a mat-button target="_blank" class="button" color="primary">Criar Conta</a>
+            <button class="button" mat-raised-button color="primary">Acessar</button>
+        </div>
+
+    </form>
+</div>
