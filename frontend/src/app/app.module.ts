@@ -12,13 +12,15 @@ import { LoginComponent } from './views/login/login.component';
 import { FormComponent } from './components/form/form.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatButtonModule } from '@angular/material/button'
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { CreateAccountComponent } from './views/create-account/create-account.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FormComponent
+    FormComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

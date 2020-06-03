@@ -1,0 +1,43 @@
+<div class="container-account">
+
+    <form class="form-account">
+        <div class="header">
+            <img src="assets/img/Logo.png" alt="">
+            <h1>Crie sua conta</h1>
+        </div>
+        <mat-form-field appearance="outline" class="account-input">
+            <mat-label class="label">Nome</mat-label>
+            <input matInput required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="account-input">
+            <mat-label class="label">Email</mat-label>
+            <input matInput placeholder="pat@example.com" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="account-input">
+            <mat-label class="label">Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="account-input">
+            <mat-label class="label">Confirmar Senha</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <!-- <mat-hint>Hint</mat-hint> -->
+        </mat-form-field>
+
+        <div class="form-button">
+            <a mat-button routerLink="/" routerLinkActive="router-link-active" class="button"
+                color="primary">Cancelar</a>
+            <button class="button" mat-raised-button color="primary">Confirmar</button>
+        </div>
+
+    </form>
+</div>

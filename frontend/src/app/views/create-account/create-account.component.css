@@ -1,4 +1,4 @@
-.container-login {
+.container-account {
     width: 100%;
     max-width: 1180px;
     /* border: 1px solid; */
@@ -9,16 +9,22 @@
     align-items: center;
     justify-content: center;
 }
-.container-login .form-login{
+.container-account .form-account{
     width: 400px;
-    height: 300px;
+    height: auto;
     /* border: 1px solid; */
 }
-.container-login .form-login .login-input{
+.container-account .form-account .account-input{
     width: 100%;
 }
-.container-login .header{
-    margin-bottom: 52px;
+.container-account .form-account .header{
+    margin-bottom: 20px;
+    margin-right: auto;
+}
+.container-account .form-account .header h1{
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 10px;
 }
 .lembrar{
     color: #A8A8A8;

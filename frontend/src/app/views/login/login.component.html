@@ -4,23 +4,23 @@
     </div>
     <form class="form-login">
         <mat-form-field appearance="outline" class="login-input">
-            <mat-label>Email ou Login</mat-label>
-            <input matInput>
-            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-            <!-- <mat-hint>Hint</mat-hint> -->
+            <mat-label class="label">Email ou Login</mat-label>
+            <input matInput placeholder="pat@example.com" required>
+            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="login-input">
-            <mat-label>Senha</mat-label>
+        <mat-form-field appearance="outline" class="login-input senha">
+            <mat-label class="label">Senha</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>
         <mat-checkbox class="lembrar" color="primary">Lembrar minha senha</mat-checkbox>
+
         <div class="form-button">
-            <a mat-button target="_blank" class="button" color="primary">Criar Conta</a>
+            <a mat-button routerLink="/account/new" class="button" color="primary">Criar Conta</a>
             <button class="button" mat-raised-button color="primary">Acessar</button>
         </div>
 
