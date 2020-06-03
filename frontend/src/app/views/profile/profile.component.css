@@ -1,0 +1,40 @@
+.container-profile {
+    width: 100%;
+    max-width: 900px;
+    /* border: 1px solid; */
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-profile .header{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}  
+.header img{
+    height: 45px;
+}
+.header .info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header .info .username{
+    font-weight: 500;
+    color: #A8A8A8;
+    margin-right: 20px;
+}
+.container-profile .card{
+    margin-top: 20px;
+}
+.container-profile .card .card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.container-profile .card .card-header .button{
+    color: #fff;
+    height: 35px;
+}

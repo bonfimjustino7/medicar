@@ -13,14 +13,17 @@ import { FormComponent } from './components/form/form.component'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon';
-import { CreateAccountComponent } from './views/create-account/create-account.component'
+import { CreateAccountComponent } from './views/create-account/create-account.component';
+import { ProfileComponent } from './views/profile/profile.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FormComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { CreateAccountComponent } from './views/create-account/create-account.co
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
