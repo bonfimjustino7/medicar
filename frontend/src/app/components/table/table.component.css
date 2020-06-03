@@ -1,0 +1,31 @@
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    /* border: 1px solid #ddd; */
+}
+th, td {
+    text-align: left;
+    padding: 10px;
+}
+tr:nth-child(even) {
+    background-color: #F8F8F8;
+  }
+.btn-desmarcar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-desmarcar .icon{
+    margin-right: 8px;
+    font-size: 20px;
+    margin-top: 4px;
+}
+table thead tr td{
+    font-weight: 500;
+    color: #A8A8A8;
+    font-size: 12px;
+}
+table tbody tr td{
+    font-size: 14px;
+}

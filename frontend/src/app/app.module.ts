@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CreateAccountComponent } from './views/create-account/create-account.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatCardModule } from '@angular/material/card';
     LoginComponent,
     FormComponent,
     CreateAccountComponent,
-    ProfileComponent
+    ProfileComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
