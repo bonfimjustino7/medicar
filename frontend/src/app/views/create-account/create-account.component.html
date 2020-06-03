@@ -25,10 +25,10 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Confirmar Senha</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput [type]="hide2 ? 'password' : 'text'">
+            <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide2">
+                <mat-icon class="olho">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>

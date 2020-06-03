@@ -9,6 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class CreateAccountComponent implements OnInit {
 
   hide = true;
+  hide2 = true;
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
