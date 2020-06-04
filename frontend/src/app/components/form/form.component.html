@@ -1,3 +1,16 @@
-<form class="form">
+<div class="container-account">
 
-</form>
+    <form class="form-account">
+        <div class="header">
+            <img src="assets/img/Logo.png" alt="">
+            <h1>{{ title }}</h1>
+        </div>
+        <ng-content></ng-content>
+        <div class="form-button">
+            <a mat-button (click)="goBack()" routerLinkActive="router-link-active" class="button"
+                color="primary">Cancelar</a>
+            <button class="button" mat-raised-button color="primary">Confirmar</button>
+        </div>
+
+    </form>
+</div>

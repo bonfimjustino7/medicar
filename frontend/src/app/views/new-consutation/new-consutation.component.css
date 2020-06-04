@@ -1,0 +1,13 @@
+.account-input{
+    width: 100%;
+}
+.olho{
+    color: #A8A8A8;
+    z-index: 0;
+}
+.senha {
+    height: 60px;
+}
+.label{
+    color: #A8A8A8;
+}

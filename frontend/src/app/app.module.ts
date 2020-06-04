@@ -17,6 +17,8 @@ import { CreateAccountComponent } from './views/create-account/create-account.co
 import { ProfileComponent } from './views/profile/profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { TableComponent } from './components/table/table.component';
+import { NewConsutationComponent } from './views/new-consutation/new-consutation.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { TableComponent } from './components/table/table.component';
     FormComponent,
     CreateAccountComponent,
     ProfileComponent,
-    TableComponent
+    TableComponent,
+    NewConsutationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { TableComponent } from './components/table/table.component';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

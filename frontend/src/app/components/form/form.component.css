@@ -1,0 +1,48 @@
+.container-account {
+    width: 100%;
+    max-width: 1180px;
+    /* border: 1px solid; */
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container-account .form-account{
+    width: 400px;
+    height: auto;
+    /* border: 1px solid; */
+}
+.account-input{
+    width: 100%;
+}
+.container-account .form-account .header{
+    margin-bottom: 20px;
+    margin-right: auto;
+}
+.container-account .form-account .header h1{
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.lembrar{
+    color: #A8A8A8;
+    margin-top: 0;
+}
+.button {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+    
+}
+.button + .button{
+    color: #fff;
+}
+.form-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 46px;
+}
+

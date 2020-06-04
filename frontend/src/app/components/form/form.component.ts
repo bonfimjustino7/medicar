@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  @Input() title: string;
+
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }
 
+  goBack() {
+    this.location.back();
+  }
 }

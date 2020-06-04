@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { CreateAccountComponent } from './views/create-account/create-account.component';
 import { ProfileComponent } from './views/profile/profile.component';
+import { NewConsutationComponent } from './views/new-consutation/new-consutation.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent
+  },
+
+  {
+    path: "consultation/new",
+    component: NewConsutationComponent
   }
 ];
 

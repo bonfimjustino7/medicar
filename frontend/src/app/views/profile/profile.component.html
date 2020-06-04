@@ -9,10 +9,11 @@
     <mat-card class="card">
         <div class="card-header">
             <mat-card-title>Consulta Clínica</mat-card-title>
-            <button mat-raised-button color="primary" class="button">
+            <button mat-raised-button color="primary" routerLink="/consultation/new"
+                routerLinkActive="router-link-active" class="button">
                 <mat-icon class="icon">add</mat-icon> Nova Consulta
             </button>
         </div>
-        <app-table></app-table>
+        <app-table [consultas]="consultas"></app-table>
     </mat-card>
 </div>
