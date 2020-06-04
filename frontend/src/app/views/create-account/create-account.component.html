@@ -1,22 +1,22 @@
 <div class="container-account">
 
-    <form class="form-account">
+    <form #form="ngForm" class="form-account" (submit)="create(form)">
         <div class="header">
             <img src="assets/img/Logo.png" alt="">
             <h1>Crie sua conta</h1>
         </div>
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Nome</mat-label>
-            <input matInput required>
+            <input matInput ngModel name="first_name" required>
         </mat-form-field>
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Email</mat-label>
-            <input matInput placeholder="pat@example.com" required>
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            <input matInput ngModel name="username" placeholder="pat@example.com" required>
+
         </mat-form-field>
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Senha</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
+            <input matInput ngModel name="password" [type]="hide ? 'password' : 'text'" required>
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon class="olho">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -25,7 +25,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Confirmar Senha</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'">
+            <input matInput ngModel name="password2" [type]="hide2 ? 'password' : 'text'" required>
             <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide2">
                 <mat-icon class="olho">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>

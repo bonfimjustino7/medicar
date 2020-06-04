@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -34,9 +35,15 @@ export class ProfileComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  name: string;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.name = localStorage.getItem('name');
   }
 
+  logout(): void {
+    localStorage.removeItem('name');
+    this.router.navigate([''])
+  }
 }

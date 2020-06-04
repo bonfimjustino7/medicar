@@ -2,3 +2,4 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.error{ background: rgb(212, 25, 25); color: #fff;}

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, NgForm } from '@angular/forms';
+import { UserService } from './user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -13,17 +16,30 @@ export class CreateAccountComponent implements OnInit {
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor() { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  create(f: NgForm) {
+    if (f.valid) {
+
+      this.userService.createUser(f.value).subscribe((user) => {
+        localStorage.setItem('token', user.token);
+        localStorage.setItem('name', user.first_name);
+
+        this.snackBar.open('Usuário criado com sucesso', 'X', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+        this.router.navigate(['/profile']);
+      }, error => {
+        console.log(error)
+      });
+
+    }
   }
 
 }
