@@ -87,13 +87,14 @@ class ConsultasSerializers(serializers.ModelSerializer):
         return super().is_valid(raise_exception)
 
 class CreateSerializers(serializers.ModelSerializer):
+    first_name = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
     token = serializers.CharField(read_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'token')
+        fields = ('username', 'password', 'password2', 'token', 'first_name')
 
 
     def is_valid(self, raise_exception=False):
