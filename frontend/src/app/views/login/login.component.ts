@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
-          panelClass: ['error'],
         })
       });
     }

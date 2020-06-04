@@ -21,7 +21,6 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   create(f: NgForm) {
     if (f.valid) {
 
@@ -36,7 +35,16 @@ export class CreateAccountComponent implements OnInit {
         });
         this.router.navigate(['/profile']);
       }, error => {
-        console.log(error)
+
+        if (error.error) {
+          Object.values(error.error).map((e: string) => {
+            this.snackBar.open(e, 'X', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
+          })
+        }
       });
 
     }
