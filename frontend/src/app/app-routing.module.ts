@@ -4,6 +4,7 @@ import { LoginComponent } from './views/login/login.component';
 import { CreateAccountComponent } from './views/create-account/create-account.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { NewConsutationComponent } from './views/new-consutation/new-consutation.component';
+import { GuardService } from './auth/guard.service';
 
 
 const routes: Routes = [
@@ -14,17 +15,19 @@ const routes: Routes = [
 
   {
     path: "account/new",
-    component: CreateAccountComponent
+    component: CreateAccountComponent,
   },
 
   {
     path: "profile",
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [GuardService]
   },
 
   {
     path: "consultation/new",
-    component: NewConsutationComponent
+    component: NewConsutationComponent,
+    canActivate: [GuardService]
   }
 ];
 

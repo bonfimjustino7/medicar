@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -11,12 +10,32 @@ export class LoginService {
 
   base_url = 'http://localhost:8000/'
 
-  constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
+  // private has_authenticate = false;
+
+  constructor(private http: HttpClient) { }
 
 
   authenticate(credenials: any): Observable<Object> {
     delete credenials.checked;
-    return this.http.post<Object>(this.base_url + 'api-token-auth/', credenials);
+    const response = this.http.post<Object>(this.base_url + 'api-token-auth/', credenials);
 
+    response.subscribe(_ => {
+      localStorage.setItem('authenticate', 'true');
+
+    }, _ => localStorage.removeItem('authenticate'))
+
+    return response
+  }
+
+  is_authenticate(): boolean {
+
+    if (localStorage.getItem('authenticate'))
+      return true
+
+    return false
+  }
+
+  desconectar(): void {
+    localStorage.removeItem('authenticate')
   }
 }

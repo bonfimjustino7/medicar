@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
-    localStorage.clear();
+
   }
 
   logar(f: NgForm): void {
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         // console.log(token.token)
         localStorage.setItem('token', user.token);
         localStorage.setItem('name', user.name);
+        console.log(this.loginService.is_authenticate())
         setTimeout(() => {
           this.router.navigate(['/profile']);
         }, 700)

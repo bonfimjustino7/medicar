@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -36,13 +38,20 @@ export class ProfileComponent implements OnInit {
   ]
 
   name: string;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginService: LoginService,
+    private profileServise: ProfileService) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem('name');
+    this.profileServise.list().subscribe(e => {
+      console.log(e);
+      this.consultas = e.data
+    })
   }
 
   logout(): void {
+    console.log('Chamou o logout')
+    this.loginService.desconectar();
     localStorage.removeItem('name');
     this.router.navigate([''])
   }

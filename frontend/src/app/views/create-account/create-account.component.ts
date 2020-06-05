@@ -27,6 +27,7 @@ export class CreateAccountComponent implements OnInit {
       this.userService.createUser(f.value).subscribe((user) => {
         localStorage.setItem('token', user.token);
         localStorage.setItem('name', user.first_name);
+        localStorage.setItem('authenticate', 'true');
 
         this.snackBar.open('Usuário criado com sucesso', 'X', {
           duration: 3000,

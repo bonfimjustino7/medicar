@@ -21,7 +21,10 @@ import { NewConsutationComponent } from './views/new-consutation/new-consutation
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { LoginService } from './views/login/login.service';
+import { GuardService } from './auth/guard.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,11 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    LoginService,
+    GuardService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
