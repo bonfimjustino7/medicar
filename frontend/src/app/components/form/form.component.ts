@@ -10,6 +10,8 @@ export class FormComponent implements OnInit {
 
   @Input() title: string;
 
+  @Input() btnDefault: boolean = true;
+
   constructor(private location: Location) { }
 
   ngOnInit(): void {

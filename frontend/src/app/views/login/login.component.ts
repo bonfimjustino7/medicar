@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   hide = true;
 
+  center = true;
 
   constructor(private loginService: LoginService, private snackBar: MatSnackBar, private router: Router) { }
 

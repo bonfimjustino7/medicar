@@ -1,4 +1,4 @@
-.container-account {
+.container {
     width: 100%;
     max-width: 1180px;
     /* border: 1px solid; */
@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
 }
-.container-account .form-account{
+.container .form{
     width: 400px;
     height: auto;
     /* border: 1px solid; */
@@ -17,11 +17,11 @@
 .account-input{
     width: 100%;
 }
-.container-account .form-account .header{
+.container .header{
     margin-bottom: 20px;
     margin-right: auto;
 }
-.container-account .form-account .header h1{
+.container .form .header h1{
     font-weight: 500;
     font-size: 18px;
     margin-top: 10px;

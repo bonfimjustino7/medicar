@@ -1,7 +1,4 @@
-<div class="container-login">
-    <div class="header">
-        <img src="assets/img/Logo.png" alt="">
-    </div>
+<app-form [btnDefault]=false>
     <form #f="ngForm" class="form-login" (submit)="logar(f)">
         <mat-form-field appearance="outline" class="login-input">
             <mat-label class="label">Email ou Login</mat-label>
@@ -25,4 +22,4 @@
         </div>
 
     </form>
-</div>
+</app-form>
