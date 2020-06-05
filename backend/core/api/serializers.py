@@ -101,7 +101,7 @@ class ConsultasSerializers(serializers.ModelSerializer):
         return super().is_valid(raise_exception)
 
 class CreateSerializers(serializers.ModelSerializer):
-    email = serializers.CharField(required=False)
+    email = serializers.CharField(required=True)
     first_name = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
