@@ -20,7 +20,7 @@ import { TableComponent } from './components/table/table.component';
 import { NewConsutationComponent } from './views/new-consutation/new-consutation.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { LoginService } from './views/login/login.service';
@@ -50,6 +50,7 @@ import { GuardService } from './auth/guard.service';
     MatSnackBarModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

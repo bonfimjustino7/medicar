@@ -9,11 +9,17 @@
             <mat-label class="label">Nome</mat-label>
             <input matInput ngModel name="first_name" required>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="account-input">
-            <mat-label class="label">Email</mat-label>
-            <input matInput ngModel name="username" placeholder="pat@example.com" required>
 
+        <mat-form-field appearance="outline" class="account-input">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="email" name="ee" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                placeholder="Ex. pat@example.com" required>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Insira um email válido
+            </mat-error>
         </mat-form-field>
+
+
         <mat-form-field appearance="outline" class="account-input">
             <mat-label class="label">Senha</mat-label>
             <input matInput ngModel name="password" [type]="hide ? 'password' : 'text'" required>
@@ -36,7 +42,8 @@
         <div class="form-button">
             <a mat-button routerLink="/" routerLinkActive="router-link-active" class="button"
                 color="primary">Cancelar</a>
-            <button class="button" mat-raised-button color="primary">Confirmar</button>
+            <button class="button" mat-raised-button color="primary"
+                [disabled]="!form.valid || emailFormControl.hasError('email') || emailFormControl.hasError('required')">Confirmar</button>
         </div>
 
     </form>
