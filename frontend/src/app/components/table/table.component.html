@@ -10,10 +10,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let consulta of consultas">
-            <td>{{ consulta.especialidade }}</td>
-            <td>{{ consulta.medico }}</td>
-            <td>{{ consulta.data }}</td>
-            <td>{{ consulta.hora }}</td>
+            <td>{{ consulta.medico.especialidade.nome }}</td>
+            <td>{{ consulta.medico.nome }}</td>
+            <td>{{ consulta.dia }}</td>
+            <td>{{ consulta.horario }}</td>
             <td class="btn-desmarcar">
                 <a mat-button color="primary">
                     <mat-icon class="icon">clear</mat-icon><span style="display: inline-block;">Desmarcar</span>
