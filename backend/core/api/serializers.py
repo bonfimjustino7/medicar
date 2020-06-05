@@ -1,12 +1,15 @@
 import datetime
 
-from django.contrib.auth import password_validation
+from django.contrib.auth import password_validation, authenticate
 from django.contrib.auth.models import User
 from django.core import exceptions
 from rest_framework import serializers, status
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+
 from core.models import Especialidade, Agenda, Medico, Consulta, Horario
 from rest_framework.exceptions import ValidationError
 from rest_framework.authtoken.models import Token
+from django.utils.translation import gettext_lazy as _
 
 class EspecialidadeSerializers(serializers.ModelSerializer):
     class Meta:
@@ -98,14 +101,16 @@ class ConsultasSerializers(serializers.ModelSerializer):
         return super().is_valid(raise_exception)
 
 class CreateSerializers(serializers.ModelSerializer):
+    email = serializers.CharField(required=False)
     first_name = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
     password2 = serializers.CharField(required=True, write_only=True)
     token = serializers.CharField(read_only=True)
+    username = serializers.CharField(required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'token', 'first_name')
+        fields = ('username', 'password', 'password2', 'token', 'first_name', 'email')
 
 
     def is_valid(self, raise_exception=False):
@@ -114,11 +119,27 @@ class CreateSerializers(serializers.ModelSerializer):
         if dados['password'] and dados['password2'] and dados['password'] != dados['password2']:
             raise ValidationError({'datail': 'As senhas devem combinar.'})
 
+        if '@' not in dados['email']:
+            raise ValidationError({'detail': 'Email inválido.'})
+
         return is_valid
 
     def validate(self, attrs):
         data = attrs
         del data['password2']
+
+        user = User.objects.filter(email=data['email'])
+        if user:
+            raise ValidationError({'detail': 'Já existe um usuário com esse email.'})
+
+        if not data.get('username'):
+            username = str(data['email']).split('@')[0]
+            user = User.objects.filter(username=username)
+            if not user:
+                data['username'] = username
+            else:
+                raise ValidationError({'detail': 'Já existe um usuário com esse username'})
+
         user = User(**data)
 
         password = attrs.get('password')
@@ -132,7 +153,7 @@ class CreateSerializers(serializers.ModelSerializer):
             errors['password'] = list(e.messages)
             raise ValidationError(errors)
 
-        return super().validate(data)
+        return data
 
 
     def create(self, validated_data):
@@ -143,3 +164,33 @@ class CreateSerializers(serializers.ModelSerializer):
         serialize['token'] = Token.objects.get(user=user).key
 
         return serialize
+
+class UserAuthenticate(AuthTokenSerializer):
+
+    def validate(self, attrs):
+        username = attrs.get('username')
+        password = attrs.get('password')
+
+        if username and password:
+            if '@' in username:
+                user = User.objects.filter(email=username)
+                if user.count() == 1:
+                    username = user.get()
+
+            user = authenticate(request=self.context.get('request'),
+                                username=username, password=password)
+
+            # The authenticate call simply returns None for is_active=False
+            # users. (Assuming the default ModelBackend authentication
+            # backend.)
+            if not user:
+                msg = _('Unable to log in with provided credentials.')
+                raise serializers.ValidationError(msg, code='authorization')
+        else:
+            msg = _('Must include "username" and "password".')
+            raise serializers.ValidationError(msg, code='authorization')
+
+        attrs['user'] = user
+        return attrs
+
+

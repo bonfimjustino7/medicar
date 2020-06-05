@@ -16,7 +16,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import EspecialidadeSerializers, MedicoSerializers, ConsultasSerializers, AgendaSerializers, \
-    CreateSerializers
+    CreateSerializers, UserAuthenticate
 
 
 class EspecialidadeViewSet(viewsets.ModelViewSet):
@@ -122,6 +122,9 @@ class CreateUserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = CreateSerializers
 
 class CustomAuthToken(ObtainAuthToken):
+
+    serializer_class = UserAuthenticate
+
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
