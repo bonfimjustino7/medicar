@@ -68,7 +68,7 @@ class ConsultasSerializers(serializers.ModelSerializer):
         d = datetime.datetime
 
         agenda = Agenda.objects.get(id=self.initial_data['agenda_id'])
-        consultas = Consulta.objects.filter(agenda__dia=agenda.dia, horario=self.initial_data['horario'])
+        consultas = Consulta.objects.filter(agenda__dia=agenda.dia, horario=self.initial_data['horario'], agenda__medico=agenda.medico)
         hora_consulta = d.strptime(self.initial_data['horario'], '%H:%M').time()
 
         if agenda.dia < d.now().date() and hora_consulta != datetime.time(hour=0):
@@ -85,7 +85,7 @@ class ConsultasSerializers(serializers.ModelSerializer):
             raise ValidationError({'detail': 'Esse horário não está disponivel para essa agenda.'})
 
 
-        if d.now().date() == agenda.dia and hora_consulta != datetime.time(hour=0):
+        if d.now().date() == agenda.dia:
             if hora_consulta < d.now().time():
                 raise ValidationError({'detail': 'Não é possivel marcar consultas para horários passados.'})
 
