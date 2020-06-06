@@ -12,7 +12,10 @@ export class ConsultaService {
   constructor(private http: HttpClient) { }
 
   listEspecialidades(): Observable<any> {
-    return this.http.get(this.base_url + 'especialidades/')
+    return this.http.get(this.base_url + 'especialidades/');
+  }
+  marcarConsulta(data): Observable<any> {
+    return this.http.post(this.base_url + 'consultas/', data);
   }
 
 }

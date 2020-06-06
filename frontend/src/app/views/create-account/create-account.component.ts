@@ -47,7 +47,7 @@ export class CreateAccountComponent implements OnInit {
         localStorage.setItem('name', user.first_name);
         localStorage.setItem('authenticate', 'true');
 
-        this.snackBar.open('Usuário criado com sucesso', 'X', {
+        this.snackBar.open('Usuário criado com sucesso', 'x', {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
@@ -57,7 +57,7 @@ export class CreateAccountComponent implements OnInit {
 
         if (error.error) {
           Object.values(error.error).map((e: string) => {
-            this.snackBar.open(e, 'X', {
+            this.snackBar.open(e, 'x', {
               duration: 3000,
               horizontalPosition: 'right',
               verticalPosition: 'top',

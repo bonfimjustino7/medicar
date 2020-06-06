@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
     if (f.valid) {
       this.loginService.authenticate(f.value).subscribe((user: any) => {
-        this.snackBar.open('Usuário Logado com sucesso', 'X', {
+        this.snackBar.open('Usuário Logado com sucesso', 'x', {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
       }, error => {
         const { non_field_errors } = error.error
-        this.snackBar.open(non_field_errors[0], 'X', {
+        this.snackBar.open(non_field_errors[0], 'x', {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
