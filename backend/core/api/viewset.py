@@ -74,7 +74,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
             if consulta.horario <= datetime.datetime.now().time():
                 raise ValidationError({'detail': 'Você não pode desmarcar essa consulta. Ela já aconteceu.'})
 
-        super(ConsultaViewSet, self).destroy(request, *args, **kwargs)
+        return super(ConsultaViewSet, self).destroy(request, *args, **kwargs)
 
 
 class AgendaViewSet(viewsets.ModelViewSet):
