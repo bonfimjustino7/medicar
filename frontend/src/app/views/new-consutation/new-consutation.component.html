@@ -1,42 +1,43 @@
-<app-form title="Nova Consulta">
-    <mat-form-field class="account-input" appearance="outline">
-        <mat-select placeholder="Especialidade">
-            <mat-option value="Option1">Option1</mat-option>
-            <mat-option value="Option2">Option2</mat-option>
-            <mat-option value="Option3">Option3</mat-option>
-            <mat-option value="Option4">Option4</mat-option>
-            <mat-option value="Option5">Option5</mat-option>
-        </mat-select>
-    </mat-form-field>
+<app-form title="Nova Consulta" [btnDefault]=false>
+    <form #f="ngForm" (submit)="marcar(f)">
+        <mat-form-field class=" account-input" appearance="outline">
+            <mat-select placeholder="Especialidade" ngModel name="especialidade" required>
+                <mat-option value="{{ep.id}}" *ngFor="let ep of especialidades">{{ep.nome}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field class="account-input" appearance="outline">
-        <mat-select placeholder="Médico" disabled>
-            <mat-option value="Option1">Option1</mat-option>
-            <mat-option value="Option2">Option2</mat-option>
-            <mat-option value="Option3">Option3</mat-option>
-            <mat-option value="Option4">Option4</mat-option>
-            <mat-option value="Option5">Option5</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="account-input" appearance="outline">
+            <mat-select placeholder="Médico" [disabled]="has_medico ? true: false">
+                <mat-option value="Option1">Option1</mat-option>
+                <mat-option value="Option2">Option2</mat-option>
+                <mat-option value="Option3">Option3</mat-option>
+                <mat-option value="Option4">Option4</mat-option>
+                <mat-option value="Option5">Option5</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field class="account-input" appearance="outline">
-        <mat-select placeholder="Data" disabled>
-            <mat-option value="Option1">Option1</mat-option>
-            <mat-option value="Option2">Option2</mat-option>
-            <mat-option value="Option3">Option3</mat-option>
-            <mat-option value="Option4">Option4</mat-option>
-            <mat-option value="Option5">Option5</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="account-input" appearance="outline">
+            <mat-select placeholder="Data" [disabled]="has_data ? true: false">
+                <mat-option value="Option1">Option1</mat-option>
+                <mat-option value="Option2">Option2</mat-option>
+                <mat-option value="Option3">Option3</mat-option>
+                <mat-option value="Option4">Option4</mat-option>
+                <mat-option value="Option5">Option5</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field class="account-input" appearance="outline">
-        <mat-select placeholder="Hora" disabled>
-            <mat-option value="Option1">Option1</mat-option>
-            <mat-option value="Option2">Option2</mat-option>
-            <mat-option value="Option3">Option3</mat-option>
-            <mat-option value="Option4">Option4</mat-option>
-            <mat-option value="Option5">Option5</mat-option>
-        </mat-select>
-    </mat-form-field>
-
+        <mat-form-field class="account-input" appearance="outline">
+            <mat-select placeholder="Hora" [disabled]="has_horario ? true: false">
+                <mat-option value="Option1">Option1</mat-option>
+                <mat-option value="Option2">Option2</mat-option>
+                <mat-option value="Option3">Option3</mat-option>
+                <mat-option value="Option4">Option4</mat-option>
+                <mat-option value="Option5">Option5</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="form-button">
+            <a mat-button routerLinkActive="router-link-active" class="button" color="primary">Cancelar</a>
+            <button class="button" mat-raised-button color="primary" [disabled]="!f.valid">Confirmar</button>
+        </div>
+    </form>
 </app-form>

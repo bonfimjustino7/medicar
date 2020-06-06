@@ -11,3 +11,19 @@
 .label{
     color: #A8A8A8;
 }
+
+.button {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+    
+}
+.button + .button{
+    color: #fff;
+}
+.form-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 46px;
+}
