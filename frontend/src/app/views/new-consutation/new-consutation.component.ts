@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ConsultaService } from './consulta.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-consutation',
@@ -14,7 +15,7 @@ export class NewConsutationComponent implements OnInit {
 
   especialidades: Array<any>;
 
-  constructor(private consultaService: ConsultaService) { }
+  constructor(private consultaService: ConsultaService, private location: Location) { }
 
   ngOnInit(): void {
     this.consultaService.listEspecialidades().subscribe(r => {
@@ -22,6 +23,9 @@ export class NewConsutationComponent implements OnInit {
     })
   }
 
+  goBack(): void {
+    this.location.back();
+  }
   marcar(f: NgForm) {
     if (f.valid) {
       console.log(f.value);

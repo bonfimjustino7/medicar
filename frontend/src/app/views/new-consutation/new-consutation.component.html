@@ -36,7 +36,8 @@
             </mat-select>
         </mat-form-field>
         <div class="form-button">
-            <a mat-button routerLinkActive="router-link-active" class="button" color="primary">Cancelar</a>
+            <a mat-button routerLinkActive="router-link-active" (click)="goBack()" class="button"
+                color="primary">Cancelar</a>
             <button class="button" mat-raised-button color="primary" [disabled]="!f.valid">Confirmar</button>
         </div>
     </form>
