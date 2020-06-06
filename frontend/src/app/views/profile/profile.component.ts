@@ -22,21 +22,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.name = localStorage.getItem('name');
     this.profileServise.list().subscribe(consultas => {
-      console.log(consultas);
+
       this.consultas = [...consultas]
     })
   }
 
   logout(): void {
-    console.log('Chamou o logout')
+
     this.loginService.desconectar();
     localStorage.removeItem('name');
+    localStorage.removeItem('token');
     this.router.navigate([''])
   }
 
   desmarcar(consulta): void {
     this.profileServise.desmarcarConsulta(consulta.id).subscribe(e => {
-      console.log('Desmarcando...');
+
       const consultas = this.consultas.filter(c => {
         return consulta.id != c.id
       });

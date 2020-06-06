@@ -14,10 +14,9 @@ export class GuardService implements CanActivate {
 
     if (this.loginService.is_authenticate()) {
 
-      console.log('Está autorizado')
       return true
     }
-    console.log('Não está autorizado')
+
     this.router.navigate(['/'])
 
     return false

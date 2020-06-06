@@ -3,6 +3,8 @@ import { FormControl, Validators, NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +17,10 @@ export class LoginComponent implements OnInit {
 
   center = true;
 
-  constructor(private loginService: LoginService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private loginService: LoginService, private snackBar: MatSnackBar, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Login')
 
   }
 
@@ -37,7 +40,7 @@ export class LoginComponent implements OnInit {
         // console.log(token.token)
         localStorage.setItem('token', user.token);
         localStorage.setItem('name', user.name);
-        console.log(this.loginService.is_authenticate())
+
         setTimeout(() => {
           this.router.navigate(['/profile']);
         }, 700)

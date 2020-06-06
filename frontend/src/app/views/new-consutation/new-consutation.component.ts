@@ -68,14 +68,14 @@ export class NewConsutationComponent implements OnInit {
       });
     });
 
-    console.log(`Medico: ${e}`)
+
   }
 
   handleData(dataObject): void {
     this.consulta.agenda_id = dataObject.id;
     this.filtros.data_inicio = dataObject.data;
     this.filtros.data_final = dataObject.data;
-    console.log(`Dia: ${dataObject.data}`);
+
     this.horarios = [];
 
     this.agendaService.agendasDisponiveis(this.filtros).subscribe(agenda => {
@@ -88,7 +88,7 @@ export class NewConsutationComponent implements OnInit {
 
   handleHorario(horario): void {
     this.consulta.horario = horario;
-    console.log(`Horario: ${horario}`);
+
   }
 
   // Actions Buttons
@@ -97,7 +97,7 @@ export class NewConsutationComponent implements OnInit {
   }
   marcarConsulta(f: NgForm) {
     if (f.valid) {
-      console.log(this.consulta);
+
       this.consultaService.marcarConsulta(this.consulta).subscribe(consulta => {
         this.snackBar.open('Consulta marcada com sucesso', 'x', {
           duration: 2000,
