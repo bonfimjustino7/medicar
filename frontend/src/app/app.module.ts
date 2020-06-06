@@ -27,6 +27,7 @@ import { LoginService } from './views/login/login.service';
 import { GuardService } from './auth/guard.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     ProfileComponent,
     TableComponent,
     NewConsutationComponent,
-    DialogComponent
+    DialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
