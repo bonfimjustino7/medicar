@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private snackBar: MatSnackBar, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Login')
+    this.title.setTitle('Login - ' + environment.title_base)
 
   }
 

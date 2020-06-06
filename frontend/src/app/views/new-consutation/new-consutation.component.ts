@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { AgendaService } from './agenda.service';
 import { MedicoService } from './medico.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,12 +34,14 @@ export class NewConsutationComponent implements OnInit {
     private agendaService: AgendaService,
     private medicoService: MedicoService,
     private snackBar: MatSnackBar,
+    private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.consultaService.listEspecialidades().subscribe(r => {
       this.especialidades = [...r];
-    })
+    });
+    this.title.setTitle('Nova Consulta - ' + environment.title_base);
   }
 
   listarAgenda(filter: any): void {

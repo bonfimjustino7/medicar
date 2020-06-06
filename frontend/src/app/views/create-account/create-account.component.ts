@@ -4,6 +4,8 @@ import { UserService } from './user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -32,9 +34,10 @@ export class CreateAccountComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Criar Conta - ' + environment.title_base)
   }
 
   email: string;

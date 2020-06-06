@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:8000/'
+  base_url: 'http://localhost:8000/',
+  title_base: 'Medicar'
 };
 
 /*

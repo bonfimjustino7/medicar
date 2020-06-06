@@ -4,6 +4,8 @@ import { LoginService } from '../login/login.service';
 import { ProfileService } from './profile.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
+import { environment } from 'src/environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -17,14 +19,15 @@ export class ProfileComponent implements OnInit {
   name: string;
 
   constructor(private router: Router, private loginService: LoginService,
-    private profileServise: ProfileService, private dialog: MatDialog) { }
+    private profileServise: ProfileService, private dialog: MatDialog, private title: Title) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem('name');
     this.profileServise.list().subscribe(consultas => {
 
       this.consultas = [...consultas]
-    })
+    });
+    this.title.setTitle('Home - ' + environment.title_base);
   }
 
   logout(): void {

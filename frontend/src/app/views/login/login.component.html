@@ -1,5 +1,5 @@
 <app-form [btnDefault]=false>
-    <form #f="ngForm" class="form-login" (submit)="logar(f)">
+    <form #f="ngForm" class="form-login" (submit)="logar(f)" [autocomplete]="checked.value">
         <mat-form-field appearance="outline" class="login-input">
             <mat-label class="label">Email ou Login</mat-label>
             <input matInput ngModel name="username" placeholder="pat@example.com" required>
@@ -13,7 +13,7 @@
             </button>
             <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>
-        <mat-checkbox ngModel name="checked" class="lembrar" color="primary">Lembrar minha senha
+        <mat-checkbox ngModel #checked name="checked" class="lembrar" color="primary">Lembrar minha senha
         </mat-checkbox>
 
         <div class="form-button">
