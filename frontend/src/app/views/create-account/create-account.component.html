@@ -6,7 +6,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="account-input">
-            <mat-label>Email</mat-label>
+            <mat-label class="label">Email</mat-label>
             <input matInput [(ngModel)]="email" name="ee" [formControl]="emailFormControl" [errorStateMatcher]="matcher"
                 placeholder="Ex. pat@example.com" required>
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">

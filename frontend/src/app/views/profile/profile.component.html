@@ -14,6 +14,6 @@
                 <mat-icon class="icon">add</mat-icon> Nova Consulta
             </button>
         </div>
-        <app-table [consultas]="consultas"></app-table>
+        <app-table [consultas]="consultas" (selecionado)="confirmar($event)"></app-table>
     </mat-card>
 </div>

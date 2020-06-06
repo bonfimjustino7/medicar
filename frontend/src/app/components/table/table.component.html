@@ -12,10 +12,10 @@
         <tr *ngFor="let consulta of consultas">
             <td>{{ consulta.medico.especialidade.nome }}</td>
             <td>{{ consulta.medico.nome }}</td>
-            <td>{{ consulta.dia }}</td>
+            <td>{{ consulta.dia | date: 'dd/MM/yyyy' }}</td>
             <td>{{ consulta.horario }}</td>
             <td class="btn-desmarcar">
-                <a mat-button color="primary">
+                <a mat-button color="primary" (click)="escolher(consulta)">
                     <mat-icon class="icon">clear</mat-icon><span style="display: inline-block;">Desmarcar</span>
                 </a>
             </td>

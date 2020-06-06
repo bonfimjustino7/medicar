@@ -17,4 +17,8 @@ export class ProfileService {
     return this.http.get(this.base_url + 'consultas/')
 
   }
+
+  desmarcarConsulta(idConsulta): Observable<any> {
+    return this.http.delete(this.base_url + `consultas/${idConsulta}/`);
+  }
 }

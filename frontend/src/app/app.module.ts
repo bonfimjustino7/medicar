@@ -25,6 +25,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { LoginService } from './views/login/login.service';
 import { GuardService } from './auth/guard.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { GuardService } from './auth/guard.service';
     CreateAccountComponent,
     ProfileComponent,
     TableComponent,
-    NewConsutationComponent
+    NewConsutationComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +55,14 @@ import { GuardService } from './auth/guard.service';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     LoginService,
     GuardService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent],
 })
 export class AppModule { }
