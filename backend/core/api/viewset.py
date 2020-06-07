@@ -53,9 +53,13 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        qs = super().get_queryset().filter(user=self.request.user).exclude(
-            agenda__dia__lt=datetime.datetime.now().date()).exclude(horario__lt=datetime.datetime.now().time())
-        return qs.order_by('agenda__dia', 'horario')
+        qs = super().get_queryset().filter(user=self.request.user).order_by('agenda__dia', 'horario')
+        consultas_disponiveis = []
+        for consulta in qs:
+            if consulta.horario > datetime.datetime.now().time() or datetime.datetime.now().date() != consulta.agenda.dia:  # filtra os horarios passados
+                consultas_disponiveis.append(consulta)
+
+        return consultas_disponiveis
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

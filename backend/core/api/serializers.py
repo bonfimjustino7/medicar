@@ -33,7 +33,7 @@ class AgendaSerializers(serializers.ModelSerializer):
     def get_horario(self, value):
         horarios_disponiveis = []
         for horario in value.horario.all():
-            if horario.horario > datetime.datetime.now().time():  # filtra os horarios passados
+            if horario.horario > datetime.datetime.now().time() or datetime.datetime.now().date() != value.dia:  # filtra os horarios passados
                 horarios_disponiveis.append(horario.horario)
 
         for consulta in value.consulta_set.all():
