@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.http import QueryDict
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, status, mixins
 from rest_framework.authtoken.models import Token
@@ -70,7 +71,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         return Response(serializer.to_representation(consulta), status=status.HTTP_201_CREATED)
 
     def destroy(self, request, *args, **kwargs):
-        consulta = self.get_object()
+        consulta = get_object_or_404(Consulta, **kwargs)
         if consulta.agenda.dia < datetime.datetime.now().date():  # is now ?
             raise ValidationError({'detail': 'Você não pode desmarcar essa consulta. Ela já aconteceu.'})
 
@@ -78,7 +79,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
             if consulta.horario <= datetime.datetime.now().time():
                 raise ValidationError({'detail': 'Você não pode desmarcar essa consulta. Ela já aconteceu.'})
 
-        return super(ConsultaViewSet, self).destroy(request, *args, **kwargs)
+        consulta.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class AgendaViewSet(viewsets.ModelViewSet):
