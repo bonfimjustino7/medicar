@@ -2,7 +2,6 @@
 
 
 ## Instalação:
-### Backend
 - Clonando o projeto:
 ```commandline
 git clone https://github.com/bonfimjustino7/medicar.git
