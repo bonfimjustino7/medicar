@@ -1,13 +1,13 @@
 ### Medicar
 
 
-##Instalação:
-###Backend
+## Instalação:
+### Backend
 - Clonando o projeto:
 ```commandline
 git clone https://github.com/bonfimjustino7/medicar.git
 ```
-#Backend
+# Backend
 - Criando virtualenv e instalando dependências: 
 ```commandline
 cd medicar/backend
@@ -24,7 +24,7 @@ python manage.py createsuperuser
 ```commandline
 python manage.py runserver
 ```
-#Frontend
+# Frontend
 - Instalando dependências:
 ```commandline
 cd frontend
