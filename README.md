@@ -1,6 +1,6 @@
 # Medicar
 
-
+![N|Solid](assets/img/Logo.png)
 ## Instalação:
 - Clonando o projeto:
 ```commandline
