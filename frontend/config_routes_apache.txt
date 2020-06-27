@@ -17,3 +17,7 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+
+3-rodar os seguintes comandos:
+  sudo a2enmod rewrite
+  sudo systemctl restart apache2
