@@ -1,0 +1,19 @@
+1 - adicionar essas linhas ao arquivo apache2.conf
+
+<Directory "/var/www/html/">
+    Options FollowSymLinks
+    Allow from all
+    AllowOverride All
+</Directory>
+
+
+2 - Criar um arquivo '.htaccess' no diretorio /var/www/html (ao lado do arquivo index.html)
+
+<IfModule mod_rewrite.c>
+  Options Indexes FollowSymLinks
+  RewriteEngine On
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
